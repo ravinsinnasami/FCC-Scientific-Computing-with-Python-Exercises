@@ -64,6 +64,27 @@ def add_time(start, duration, day=''):
             else:
                 start_denomination = time_denomination[0]
                 day_changed = True
+    
+    # calculates the number of days passed using the denomination counter.
+    # its divide by 2 because in a day, there's 2 denomination in a day.
+    no_of_days_passed = denomination_change_counter/2
+
+    # converts the no of days passed into whole integer.
+    no_of_days_passed_whole_number = int(no_of_days_passed)
+    # obtains the remaining decimal value to determine the rounding off.
+    no_of_days_passed_decimals = no_of_days_passed - no_of_days_passed_whole_number
+
+    # if the remaining decimal value calculated above is 0.5 or more, the no_of_days_passed_whole_number is increased by 1.
+    if no_of_days_passed_decimals >= 0.5:
+        no_of_days_passed_whole_number += 1
+
+    # convert start hour and minute to string.
+    start_time_hour = str(start_time_hour)
+    start_time_minutes = str(start_time_minutes)
+
+    # check the length of minutes. If it's not 2, then add a leading 0
+    if len(start_time_minutes) != 2:
+        start_time_minutes = "0" + start_time_minutes
 
 
 
