@@ -40,6 +40,31 @@ def add_time(start, duration, day=''):
 
             denomination_change_counter += 1
 
+    # loop through duration minutes. add 1 to minutes. when minutes reach 60, sets it back to 0 and adds 1 to hour.
+    # if the hour addition goes to 12, add 1 denomination counter.
+    for minutes in range(duration_minutes):
+        start_time_minutes += 1
+
+        if start_time_minutes == 60:
+            start_time_minutes = 0
+            start_time_hour += 1
+
+            if start_time_hour == 12:
+                denomination_change_counter += 1
+
+    # used to changed AM to PM or vice versa. when changes occur, sets day_changed to True.
+    # if the counter % 2 is 0, then no change. this means it switched from AM -> PM -> AM.
+    # else, change it. if AM -> PM. if PM -> AM.
+    if denomination_change_counter >= 1:
+        if denomination_change_counter % 2 == 0:
+            day_changed = True
+        else:
+            if start_denomination == time_denomination[0]:
+                start_denomination = time_denomination[1]
+            else:
+                start_denomination = time_denomination[0]
+                day_changed = True
+
 
 
 
