@@ -115,8 +115,25 @@ def add_time(start, duration, day=''):
         # sets the new day based on the current day index
         new_day = days_in_a_week[current_day_index]
 
-
-
+    # appends x days to the return value
+    # if 1 day, just has next day. if more than a day, has the appropriate value to it.
+    # appends the day in title case if required.
+    if day:
+        if day_changed:
+            if no_of_days_passed_whole_number <= 1:
+                new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination}, {new_day.title()} (next day)"
+            else:
+                new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination}, {new_day.title()} ({no_of_days_passed_whole_number} days later)"
+        else:
+            new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination}, {new_day.title()}"
+    else:
+        if day_changed:
+            if no_of_days_passed_whole_number <= 1:
+                new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination} (next day)"
+            else:
+                new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination} ({no_of_days_passed_whole_number} days later)"
+        else:
+            new_time = f"{start_time_hour}:{start_time_minutes} {start_denomination}"
 
 
     return new_time
