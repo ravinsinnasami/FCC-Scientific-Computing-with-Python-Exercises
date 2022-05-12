@@ -26,6 +26,16 @@ def add_time(start, duration, day=''):
     # variable that is to be returned
     new_time = ''
 
+    # dictionary to check the days that is passed in and to accordingly change the day to pass out.
+    # added appropriate range list to be used in loop.
+    # a current day index to store the index of day that is passed in.
+    # convert the passed in day argument to lowercase to keep consistency.
+    days_in_a_week = {1:'monday', 2:'tuesday', 3:'wednesday', 4:'thursday', 5:'friday', 6:'saturday', 7:'sunday'}
+    days_in_a_week_index = range(1,8)
+    current_day_index = 0
+    day = day.lower()
+    new_day = ''
+
     # loop through the duration hour. Add 1 to start hour. If reaches 12, check if its the last value, if yes keep as 12
     # else, change hour to 0 and start again.
     # denomination counter +1 everything it reaches to 12.
@@ -85,6 +95,25 @@ def add_time(start, duration, day=''):
     # check the length of minutes. If it's not 2, then add a leading 0
     if len(start_time_minutes) != 2:
         start_time_minutes = "0" + start_time_minutes
+
+
+    if day:
+        # loop through the index of the days and uses it as key value for dictionary
+        # compares day argument with dictionary. if found, sets the index to current_day_index.
+        for day_index in days_in_a_week_index:
+            if days_in_a_week[day_index] == day:
+                current_day_index = day_index
+                break
+
+        # loop through the no of days passed range. add 1 to the current_day_index
+        # if the current_day_index reaches 8, it sets to 1 [meaning set back to monday index]
+        for days_passed in range(no_of_days_passed_whole_number):
+            current_day_index += 1
+            if current_day_index == 8:
+                current_day_index = 1
+
+        # sets the new day based on the current day index
+        new_day = days_in_a_week[current_day_index]
 
 
 
