@@ -20,6 +20,10 @@ class Category():
         # variable for def transfer
         self.transfer_amount = 0
 
+        # variable for def check_funds
+        self.check_funds_amount = 0
+
+
     # a method to deposit.
     # requires amount, but description is optional
     # appends the amount and description as dictionary into ledger list.
@@ -65,6 +69,27 @@ class Category():
             return True
         else:
             return False
+
+    # method to check balance
+    # get balance from def get_balance and compare against given value.
+    # if balance is more or equal to amount, return True. Else, return False.
+    def check_funds(self, amount):
+        self.check_funds_amount = amount
+        if self.get_balance() >= self.check_funds_amount:
+            return True
+        else:
+            return False
+
+    # method to print the instance
+    # each print is appended or concatenated to the final_print variable which is then returned.
+    def __repr__(self):
+        final_prints = ''
+        final_prints += f"{self.category.title().center(30, '*')}\n"
+        for element in self.ledger:
+            number_to_2dp = str("{:.2f}".format(element['amount']))
+            final_prints += f"{element['description'][:23].ljust(23)}{number_to_2dp.rjust(7)}\n"
+        final_prints += f"Total: {self.get_balance()}"
+        return final_prints
 
 
 def create_spend_chart(categories):
