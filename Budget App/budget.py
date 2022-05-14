@@ -1,7 +1,6 @@
 class Category():
 
     # initialize Category class
-
     def __init__(self, category):
         self.category = category
         self.ledger = []
@@ -17,6 +16,9 @@ class Category():
 
         # variable for def get_balance
         self.balance = 0
+
+        # variable for def transfer
+        self.transfer_amount = 0
 
     # a method to deposit.
     # requires amount, but description is optional
@@ -43,10 +45,26 @@ class Category():
     # each time the value is obtained from ledger, it is added to the balance variable.
     # lastly, return balance variable.
     def get_balance(self):
+        self.balance = 0
         for element in self.ledger:
             self.balance += element['amount']
-        return self.balance
+        self.current_balance = self.balance
+        return self.current_balance
 
+    # method to transfer funds.
+    # transfer_category_obj is another instance
+    # check if there is enough deposit to do transfer. if unable, return False. Else:
+        # send info to withdraw method
+        # append info to transfer_category_obj ledger
+        # return True
+    def transfer(self, amount, transfer_category_obj):
+        self.transfer_amount = amount
+        if self.deposit_amount > self.transfer_amount:
+            self.withdraw(self.transfer_amount, f"Transfer to {transfer_category_obj.category}")
+            transfer_category_obj.ledger.append({'amount': self.transfer_amount, 'description': f"Transfer from {self.category}"})
+            return True
+        else:
+            return False
 
 
 def create_spend_chart(categories):
