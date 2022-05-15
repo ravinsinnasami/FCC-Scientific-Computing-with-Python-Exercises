@@ -102,7 +102,6 @@ class Category():
         else:
             return False
 
-.
     def __repr__(self):
         """ Method to print a set things when the object is printed.
             creates a variable to store the strings.
