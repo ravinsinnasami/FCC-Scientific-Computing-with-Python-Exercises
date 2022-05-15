@@ -155,3 +155,52 @@ def create_spend_chart(categories):
         elif percentage == 0:
             check_spaces_needed = 11
             spaces_needed_for_each_category.append(check_spaces_needed)
+
+    # prints the spaces and marks based on the check_spaces_needed and appends to a list
+    printed_spaces_and_dots = []
+
+    for number in spaces_needed_for_each_category:
+        printed_spaces_and_dots.append(f"{' '*number}{'o'*(11-number)}")
+
+    # final variable to be returned.
+    final_print = "Percentage spent by category\n"
+
+    # print the percentage followed by spaces and/or marks line by line.
+    # for percentage side value
+        # printed starting from 100 and decreases by -10 until 0.
+        # percentage side value is adjusted using r.just(5)
+    # each character of each element in the printed_spaces_and_dots will be printed line after line.
+        # each element is accessed using its index e.g. 0,1,2 and the character in the element is accessed using the line_value_increment_counter
+    line_value_increment_counter = 0
+
+    for side_value in range (100, -10, -10):
+        final_print += f"{str(side_value).rjust(3)}| {printed_spaces_and_dots[0][line_value_increment_counter]}  {printed_spaces_and_dots[1][line_value_increment_counter]}  {printed_spaces_and_dots[2][line_value_increment_counter]}  \n"
+        line_value_increment_counter += 1
+
+    # print the dotted line after the percentage and marks.
+    # dots are aligned using .rjust(14)
+    final_print += ("-"*10).rjust(14) + "\n"
+
+    # following gets the longest word in the list of categories.
+    word_length = 0
+
+    for category in categories:
+        if len(category.category) > word_length:
+            word_length = len(category.category)
+
+    # print the categories vertically.
+    # loops using the longest category word
+        # if num is 0 as in, if it's the first character, then make it capital.
+        # else if, num is the last digit, print the line but without the newline character
+        # else, just print the line as it is.
+
+    for number in range(word_length):
+        if number == 0:
+            final_print += f"{(categories[0].category[number:number + 1]).title().rjust(6)}{(categories[1].category[number:number + 1]).title().rjust(3)}{(categories[2].category[number:number + 1]).title().rjust(3)}  \n"
+        elif number == (word_length-1):
+            final_print += f"{(categories[0].category[number:number + 1]).rjust(6)}{(categories[1].category[number:number + 1]).rjust(3)}{(categories[2].category[number:number + 1]).rjust(3)}  "
+        else:
+            final_print += f"{(categories[0].category[number:number + 1]).rjust(6)}{(categories[1].category[number:number + 1]).rjust(3)}{(categories[2].category[number:number + 1]).rjust(3)}  \n"
+
+    # return the final value.
+    return final_print
