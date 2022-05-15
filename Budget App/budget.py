@@ -108,3 +108,50 @@ def create_spend_chart(categories):
     for category in categories:
         percentage_spent = "{:.2f}".format((category.withdraw_amount/total_expense)*100)
         expenses_in_percentage.append(percentage_spent)
+
+    # get the number of spaces and dots required to map the percentage of expenses.
+    # sets initial value to 0. Starts at 0 because if % expense = 100%, then no spaces and full of marks.
+        # check value for spaces only.
+    # appends the number of spaces needed into a list.
+    check_spaces_needed = 0
+    spaces_needed_for_each_category = []
+
+    for percentage in expenses_in_percentage:
+        percentage = float(percentage)
+
+        if percentage == 100.00:
+            check_spaces_needed = 0
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 90.00:
+            check_spaces_needed = 1
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 80.00:
+            check_spaces_needed = 2
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 70.00:
+            check_spaces_needed = 3
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 60.00:
+            check_spaces_needed = 4
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 50.00:
+            check_spaces_needed = 5
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 40.00:
+            check_spaces_needed = 6
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 30.00:
+            check_spaces_needed = 7
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 20.00:
+            check_spaces_needed = 8
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage >= 10.00:
+            check_spaces_needed = 9
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage > 0.00:
+            check_spaces_needed = 10
+            spaces_needed_for_each_category.append(check_spaces_needed)
+        elif percentage == 0:
+            check_spaces_needed = 11
+            spaces_needed_for_each_category.append(check_spaces_needed)
