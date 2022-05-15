@@ -93,3 +93,18 @@ class Category():
 
 
 def create_spend_chart(categories):
+    # Create a chart that maps the percentage of expenses spent based on total withdrawal
+
+    # get the total expense spent [sum of all the categories]
+    total_expense = 0
+
+    for category in categories:
+        total_expense += category.withdraw_amount
+
+    # get the percentage of expenses spent based on total expense
+    # appends the percentage of each category to a list.
+    expenses_in_percentage = []
+
+    for category in categories:
+        percentage_spent = "{:.2f}".format((category.withdraw_amount/total_expense)*100)
+        expenses_in_percentage.append(percentage_spent)
