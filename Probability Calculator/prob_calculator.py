@@ -39,4 +39,29 @@ class Hat:
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    pass
+    """ Function to repeat drawing process a certain number of times to get best approximate probability. """
+
+    # declaring variables needed for final calculations.
+    desired_result = 0
+    yes_counter = 0
+
+    # loops through the number of times an experiment should be conducted and gets the number of times desired output turns up
+    for number in range(num_experiments):
+        recovery_content = copy.copy(hat.contents_copy)  # copy the contents value so that it can be used for resetting the contents.
+        current_result = hat.draw(num_balls_drawn)       # puts the number of balls to be drawn into draw method and returns list into current_result
+        # print(current_result)
+        for key, value in expected_balls.items():        # for every item in the dictionary, get the key and value.
+            if current_result.count(key) >= value:       # check if the number of the key word in the result is same or higher than the value.
+                yes_counter += 1                         # if yes, add 1 to counter, else set to 0
+            else:
+                yes_counter = 0
+        if yes_counter // len(expected_balls.keys()) == 1:  # check if the number of yes divided by total keys is 1. if yes, increase desired result
+            desired_result += 1
+            yes_counter = 0
+
+        hat.contents = recovery_content                  # resets the contents list so that the draw can begin with a full set
+        hat.drawn_list.clear()                           # clears the drawn_list so new result can be appended.
+
+    probability = desired_result/num_experiments         # calculates the probability
+
+    return probability
